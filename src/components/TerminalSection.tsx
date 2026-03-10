@@ -41,9 +41,9 @@ export default function TerminalSection() {
         >
           {/* Title bar */}
           <div className="flex items-center gap-2 px-4 py-3 border-b border-terminal-border">
-            <span className="w-3 h-3 rounded-full bg-red-500/80" />
-            <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-            <span className="w-3 h-3 rounded-full bg-green-500/80" />
+            <span className="w-3 h-3 rounded-full bg-destructive/80" />
+            <span className="w-3 h-3 rounded-full bg-muted-foreground/40" />
+            <span className="w-3 h-3 rounded-full bg-primary/60" />
             <span className="ml-3 text-xs text-muted-foreground/60 font-mono">bash — cloudops-deploy</span>
           </div>
 
