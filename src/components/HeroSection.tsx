@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import heroBg from "@/assets/hero-bg.jpg";
+
 
 const AFFILIATE_URL = "https://www.morelogin.com/?from=AAlpjpHv4azO";
 
@@ -9,10 +9,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <img src={heroBg} alt="" className="w-full h-full object-cover" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
-      </div>
+      <div className="absolute inset-0 -z-10 bg-background/80" />
 
       <div className="container text-center max-w-2xl mx-auto">
         <motion.div

@@ -14,7 +14,7 @@ const BADGES = [
 export default function TrustBadges() {
   const { t } = useLanguage();
   return (
-    <section className="py-12 md:py-16 border-y border-border bg-secondary/40">
+    <section className="py-12 md:py-16 border-y border-border" style={{ background: 'hsla(var(--section-bg))' }}>
       <div className="container">
         <p className="text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-8">
           {t("trust.label")}

