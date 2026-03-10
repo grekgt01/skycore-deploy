@@ -14,7 +14,7 @@ export default function PartnerSection() {
   ];
 
   return (
-    <section id="partner" className="py-20 md:py-28 bg-secondary/30">
+    <section id="partner" className="py-20 md:py-28" style={{ background: 'hsla(var(--section-bg))' }}>
       <div className="container max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

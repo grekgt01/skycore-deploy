@@ -32,7 +32,7 @@ export default function ComparisonTable() {
   ];
 
   return (
-    <section id="comparison" className="py-20 md:py-28">
+    <section id="comparison" className="py-20 md:py-28" style={{ background: 'hsla(var(--section-bg))' }}>
       <div className="container max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

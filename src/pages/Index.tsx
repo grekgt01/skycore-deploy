@@ -13,7 +13,7 @@ import FloatingBadge from "@/components/FloatingBadge";
 const Index = () => {
   return (
     <LanguageProvider>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen">
         <SiteHeader />
         <main>
           <HeroSection />

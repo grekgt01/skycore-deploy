@@ -14,7 +14,7 @@ export default function SuccessStories() {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-secondary/30">
+    <section className="py-16 md:py-24" style={{ background: 'hsla(var(--section-bg))' }}>
       <div className="container max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

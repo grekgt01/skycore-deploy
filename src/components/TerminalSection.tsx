@@ -41,7 +41,7 @@ export default function TerminalSection() {
   };
 
   return (
-    <section id="terminal" className="py-16 md:py-24">
+    <section id="terminal" className="py-16 md:py-24" style={{ background: 'hsla(var(--section-bg))' }}>
       <div className="container max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

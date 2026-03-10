@@ -26,7 +26,7 @@ export default function KnowledgeHub() {
   ];
 
   return (
-    <section id="knowledge" className="py-16 md:py-24">
+    <section id="knowledge" className="py-16 md:py-24" style={{ background: 'hsla(var(--section-bg))' }}>
       <div className="container max-w-6xl mx-auto">
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
