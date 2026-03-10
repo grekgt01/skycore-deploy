@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const SCRIPT = `#!/bin/bash
 # CloudOps Tool — Automated Multi-Accounting Server Setup
@@ -29,6 +30,7 @@ const ONE_LINER = `curl -sSL https://raw.githubusercontent.com/cloudops-tool/dep
 export default function TerminalSection() {
   const [copied, setCopied] = useState(false);
   const [showFull, setShowFull] = useState(false);
+  const { t } = useLanguage();
 
   const handleCopy = () => {
     navigator.clipboard.writeText(showFull ? SCRIPT : ONE_LINER);
@@ -47,10 +49,10 @@ export default function TerminalSection() {
           className="text-center mb-8"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-            One Command. Full Deployment.
+            {t("terminal.title")}
           </h2>
           <p className="mt-3 text-sm text-muted-foreground max-w-lg mx-auto">
-            Paste in your VPS terminal — CloudOps handles firewall, Docker, Portainer, and proxy configuration automatically.
+            {t("terminal.subtitle")}
           </p>
         </motion.div>
 
@@ -61,19 +63,19 @@ export default function TerminalSection() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="terminal-window rounded-xl overflow-hidden shadow-elevated"
         >
-          {/* Title bar */}
-          <div className="flex items-center justify-between px-4 py-2.5 border-b border-terminal-border">
+          {/* macOS-style title bar */}
+          <div className="flex items-center justify-between px-4 py-2.5 border-b border-terminal-border bg-[hsl(220,20%,12%)]">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-destructive/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/40" />
-              <span className="w-2.5 h-2.5 rounded-full bg-primary/60" />
-              <span className="ml-2 text-xs text-muted-foreground/50 font-mono">bash — cloudops-deploy</span>
+              <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+              <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
+              <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+              <span className="ml-3 text-xs text-muted-foreground/40 font-mono">cloudops@vps ~ bash</span>
             </div>
             <button
               onClick={() => setShowFull(!showFull)}
               className="text-[10px] text-terminal-accent font-mono hover:underline"
             >
-              {showFull ? "Show one-liner" : "View full script"}
+              {showFull ? t("terminal.showOneLiner") : t("terminal.viewFull")}
             </button>
           </div>
 
@@ -86,10 +88,10 @@ export default function TerminalSection() {
 
             <button
               onClick={handleCopy}
-              className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-terminal-border/60 hover:bg-terminal-border text-primary-foreground text-xs font-medium transition-colors"
+              className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-terminal-border/60 hover:bg-terminal-border text-primary-foreground text-xs font-medium transition-all"
               aria-label="Copy command"
             >
-              {copied ? <><Check size={13} /> Copied!</> : <><Copy size={13} /> Copy</>}
+              {copied ? <><Check size={13} className="text-[#28c840]" /> {t("terminal.copied")}</> : <><Copy size={13} /> {t("terminal.copy")}</>}
             </button>
           </div>
         </motion.div>
