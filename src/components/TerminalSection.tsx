@@ -2,33 +2,55 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check } from "lucide-react";
 
-const COMMAND = `curl -sSL https://raw.githubusercontent.com/cloudops-tool/deploy/main/setup.sh | bash`;
+const SCRIPT = `#!/bin/bash
+# CloudOps Tool — Automated Multi-Accounting Server Setup
+echo "Starting High-Performance Server Setup..."
+
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y docker.io docker-compose git curl wget
+
+# Portainer (GUI server management via browser)
+docker volume create portainer_data
+docker run -d -p 9000:9000 --name portainer \\
+  --restart always \\
+  -v /var/run/docker.sock:/var/run/docker.sock \\
+  -v portainer_data:/data \\
+  portainer/portainer-ce:latest
+
+echo "--------------------------------------------------"
+echo "SETUP COMPLETE!"
+echo "Portainer (GUI) is running on port 9000"
+echo "Recommended Browser: MoreLogin"
+echo "https://www.morelogin.com/?from=AAlpjpHv4azO"
+echo "--------------------------------------------------"`;
+
+const ONE_LINER = `curl -sSL https://raw.githubusercontent.com/cloudops-tool/deploy/main/setup.sh | bash`;
 
 export default function TerminalSection() {
   const [copied, setCopied] = useState(false);
+  const [showFull, setShowFull] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(COMMAND);
+    navigator.clipboard.writeText(showFull ? SCRIPT : ONE_LINER);
     setCopied(true);
     setTimeout(() => setCopied(false), 2200);
   };
 
   return (
-    <section id="terminal" className="py-20 md:py-28">
+    <section id="terminal" className="py-16 md:py-24">
       <div className="container max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10"
+          className="text-center mb-8"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
             One Command. Full Deployment.
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-            Copy the command below into your VPS terminal and let CloudOps handle the rest —
-            firewall, proxy rotation, Docker, and anti-detect configuration.
+          <p className="mt-3 text-sm text-muted-foreground max-w-lg mx-auto">
+            Paste in your VPS terminal — CloudOps handles firewall, Docker, Portainer, and proxy configuration automatically.
           </p>
         </motion.div>
 
@@ -36,38 +58,38 @@ export default function TerminalSection() {
           initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
           className="terminal-window rounded-xl overflow-hidden shadow-elevated"
         >
           {/* Title bar */}
-          <div className="flex items-center gap-2 px-4 py-3 border-b border-terminal-border">
-            <span className="w-3 h-3 rounded-full bg-destructive/80" />
-            <span className="w-3 h-3 rounded-full bg-muted-foreground/40" />
-            <span className="w-3 h-3 rounded-full bg-primary/60" />
-            <span className="ml-3 text-xs text-muted-foreground/60 font-mono">bash — cloudops-deploy</span>
+          <div className="flex items-center justify-between px-4 py-2.5 border-b border-terminal-border">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-destructive/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/40" />
+              <span className="w-2.5 h-2.5 rounded-full bg-primary/60" />
+              <span className="ml-2 text-xs text-muted-foreground/50 font-mono">bash — cloudops-deploy</span>
+            </div>
+            <button
+              onClick={() => setShowFull(!showFull)}
+              className="text-[10px] text-terminal-accent font-mono hover:underline"
+            >
+              {showFull ? "Show one-liner" : "View full script"}
+            </button>
           </div>
 
           {/* Command */}
-          <div className="relative p-5 md:p-6">
-            <pre className="font-mono text-sm md:text-base text-terminal-fg overflow-x-auto whitespace-pre-wrap break-all leading-relaxed">
+          <div className="relative p-4 md:p-5">
+            <pre className="font-mono text-xs md:text-sm text-terminal-fg overflow-x-auto whitespace-pre-wrap break-all leading-relaxed max-h-[320px] overflow-y-auto">
               <span className="text-terminal-accent">$ </span>
-              {COMMAND}
+              {showFull ? SCRIPT : ONE_LINER}
             </pre>
 
             <button
               onClick={handleCopy}
-              className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-terminal-border/60 hover:bg-terminal-border text-primary-foreground text-xs font-medium transition-colors"
+              className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-terminal-border/60 hover:bg-terminal-border text-primary-foreground text-xs font-medium transition-colors"
               aria-label="Copy command"
             >
-              {copied ? (
-                <>
-                  <Check size={14} /> Copied!
-                </>
-              ) : (
-                <>
-                  <Copy size={14} /> Copy
-                </>
-              )}
+              {copied ? <><Check size={13} /> Copied!</> : <><Copy size={13} /> Copy</>}
             </button>
           </div>
         </motion.div>
