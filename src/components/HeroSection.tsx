@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import heroBg from "@/assets/hero-bg.jpg";
+
 
 const AFFILIATE_URL = "https://www.morelogin.com/?from=AAlpjpHv4azO";
 
