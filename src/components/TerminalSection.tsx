@@ -25,6 +25,8 @@ echo "Recommended Browser: MoreLogin"
 echo "https://www.morelogin.com/?from=AAlpjpHv4azO"
 echo "--------------------------------------------------"`;
 
+
+
 const ONE_LINER = `curl -sSL https://raw.githubusercontent.com/grekgt01/docker-run/main/setup.sh | bash`;
 
 export default function TerminalSection() {

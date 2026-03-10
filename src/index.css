@@ -58,6 +58,11 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)),
+      url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
   }
   html {
     scroll-behavior: smooth;
