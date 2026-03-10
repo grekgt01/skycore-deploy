@@ -1,30 +1,28 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Globe, ChevronDown } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import type { Lang } from "@/lib/translations";
 import logoImg from "@/assets/favicon.png";
 
-const NAV_LINKS = [
-  { label: "Solutions", href: "#partner" },
-  { label: "Infrastructure", href: "#comparison" },
-  { label: "Knowledge Base", href: "#knowledge" },
-  { label: "API", href: "#terminal" },
-];
-
-const LANGUAGES = [
+const LANGUAGES: { code: Lang; label: string }[] = [
   { code: "en", label: "English" },
   { code: "ru", label: "Русский" },
   { code: "zh", label: "中文" },
   { code: "pt", label: "Português" },
-  { code: "es", label: "Español" },
-  { code: "ar", label: "العربية" },
-  { code: "hi", label: "हिन्दी" },
-  { code: "fr", label: "Français" },
 ];
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState("en");
+  const { lang, setLang, t } = useLanguage();
+
+  const NAV_LINKS = [
+    { label: t("nav.solutions"), href: "#partner" },
+    { label: t("nav.infrastructure"), href: "#comparison" },
+    { label: t("nav.knowledge"), href: "#knowledge" },
+    { label: t("nav.api"), href: "#terminal" },
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass-header">
@@ -53,7 +51,7 @@ export default function SiteHeader() {
               className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <Globe size={15} />
-              <span className="uppercase text-xs font-medium">{currentLang}</span>
+              <span className="uppercase text-xs font-medium">{lang}</span>
               <ChevronDown size={13} />
             </button>
             <AnimatePresence>
@@ -64,15 +62,15 @@ export default function SiteHeader() {
                   exit={{ opacity: 0, y: -4 }}
                   className="absolute right-0 top-8 bg-card border border-border rounded-lg shadow-elevated py-1 min-w-[140px] z-50"
                 >
-                  {LANGUAGES.map((lang) => (
+                  {LANGUAGES.map((l) => (
                     <button
-                      key={lang.code}
-                      onClick={() => { setCurrentLang(lang.code); setLangOpen(false); }}
+                      key={l.code}
+                      onClick={() => { setLang(l.code); setLangOpen(false); }}
                       className={`w-full text-left px-3 py-1.5 text-sm hover:bg-secondary transition-colors ${
-                        currentLang === lang.code ? "text-primary font-medium" : "text-foreground"
+                        lang === l.code ? "text-primary font-medium" : "text-foreground"
                       }`}
                     >
-                      {lang.label}
+                      {l.label}
                     </button>
                   ))}
                 </motion.div>
@@ -86,7 +84,7 @@ export default function SiteHeader() {
             rel="noopener noreferrer"
             className="gradient-cta text-primary-foreground text-sm font-semibold px-5 py-2 rounded-full hover:opacity-90 transition-opacity"
           >
-            Get Access
+            {t("nav.cta")}
           </a>
         </nav>
 
@@ -120,19 +118,18 @@ export default function SiteHeader() {
                   {l.label}
                 </a>
               ))}
-              {/* Mobile language */}
               <div className="flex flex-wrap gap-2 py-2">
-                {LANGUAGES.map((lang) => (
+                {LANGUAGES.map((l) => (
                   <button
-                    key={lang.code}
-                    onClick={() => setCurrentLang(lang.code)}
+                    key={l.code}
+                    onClick={() => setLang(l.code)}
                     className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
-                      currentLang === lang.code
+                      lang === l.code
                         ? "bg-primary text-primary-foreground"
                         : "bg-secondary text-muted-foreground"
                     }`}
                   >
-                    {lang.label}
+                    {l.label}
                   </button>
                 ))}
               </div>
@@ -143,7 +140,7 @@ export default function SiteHeader() {
                 className="gradient-cta text-primary-foreground text-sm font-semibold px-5 py-2.5 rounded-full text-center mt-2"
                 onClick={() => setOpen(false)}
               >
-                Get Access
+                {t("nav.cta")}
               </a>
             </nav>
           </motion.div>

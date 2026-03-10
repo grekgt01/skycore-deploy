@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Shield, Container, Server, Lock, Globe, Code } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const BADGES = [
   { icon: Server, label: "Ubuntu" },
@@ -11,11 +12,12 @@ const BADGES = [
 ];
 
 export default function TrustBadges() {
+  const { t } = useLanguage();
   return (
     <section className="py-12 md:py-16 border-y border-border bg-secondary/40">
       <div className="container">
         <p className="text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-8">
-          Compatible with industry-standard infrastructure
+          {t("trust.label")}
         </p>
         <div className="flex flex-wrap items-center justify-center gap-8 md:gap-14">
           {BADGES.map((b, i) => (

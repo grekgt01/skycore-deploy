@@ -1,38 +1,34 @@
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const AFFILIATE_URL = "https://www.morelogin.com/?from=AAlpjpHv4azO";
 
 export default function HeroSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 -z-10">
-        <img
-          src={heroBg}
-          alt=""
-          className="w-full h-full object-cover opacity-20"
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
+        <img src={heroBg} alt="" className="w-full h-full object-cover" loading="eager" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
       </div>
 
-      <div className="container text-center max-w-3xl mx-auto">
+      <div className="container text-center max-w-2xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6 }}
         >
-          <span className="inline-block mb-4 text-[11px] font-semibold uppercase tracking-widest text-primary bg-accent px-3 py-1 rounded-full">
-            Trusted by 10,000+ Engineers
+          <span className="inline-block mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary bg-accent px-3 py-1 rounded-full">
+            {t("hero.badge")}
           </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight text-foreground">
-            Infrastructure that
-            <span className="gradient-text"> thinks for you</span>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight leading-tight text-foreground">
+            {t("hero.title1")}
+            <span className="gradient-text"> {t("hero.title2")}</span>
           </h1>
-          <p className="mt-4 text-sm md:text-base text-muted-foreground max-w-lg mx-auto leading-relaxed">
-            One command to deploy, secure, and manage your entire VPS fleet.
-            The gold standard for multi-accounting and proxy management.
+          <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto leading-relaxed tracking-wide">
+            {t("hero.subtitle")}
           </p>
         </motion.div>
 
@@ -48,13 +44,13 @@ export default function HeroSection() {
             rel="noopener noreferrer"
             className="gradient-cta text-primary-foreground font-semibold px-7 py-3 rounded-full text-sm hover:opacity-90 transition-opacity animate-pulse-glow"
           >
-            Get MoreLogin — Special Offer
+            {t("hero.cta")}
           </a>
           <a
             href="#terminal"
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
           >
-            Deploy Your Server →
+            {t("hero.cta2")}
           </a>
         </motion.div>
       </div>
